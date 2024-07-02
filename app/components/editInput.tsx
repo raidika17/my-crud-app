@@ -1,28 +1,25 @@
-"use client";
-
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import React from "react";
 import SuccessCard from "./successCard";
+import { UpdateData } from "@/lib/actions";
 
 interface EditInputProps {
-  methodSubmit: string;
-  id?: string;
-  nameValue?: string;
-  emailValue?: string;
-  phoneValue?: string;
+  getId: string;
+  getEmail: string;
+  getName: string;
+  getPhone: string;
 }
 
 const EditInput: React.FC<EditInputProps> = ({
-  methodSubmit,
-  id,
-  nameValue,
-  emailValue,
-  phoneValue,
+  getId,
+  getName,
+  getPhone,
+  getEmail,
 }) => {
-  const [name, setName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [phone, setPhone] = useState<string>("");
+  const [name, setName] = useState<string>(getName);
+  const [email, setEmail] = useState<string>(getEmail);
+  const [phone, setPhone] = useState<string>(getPhone);
   const [errorsName, setErrorsName] = useState<{ name?: string }>({});
   const [errorsEmail, setErrorsEmail] = useState<{ email?: string }>({});
   const [errorsPhone, setErrorsPhone] = useState<{ phone?: string }>({});
@@ -49,7 +46,7 @@ const EditInput: React.FC<EditInputProps> = ({
   };
 
   const handleOnSuccess = () => {
-    window.location.reload();
+    route.push(`/dashboard`);
   };
 
   const handleOnChangeName = (name: string) => {
@@ -86,23 +83,12 @@ const EditInput: React.FC<EditInputProps> = ({
     setErrorsEmail(newErrors);
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     setIsOpen(true);
-
-    await fetch(`http://localhost:3001/api/users/${id}`, {
-      method: `${methodSubmit}`,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: name,
-        email: email,
-        phone: phone,
-      }),
-    });
+    UpdateData(getId, name, email, phone);
   };
 
-  const validateFormInput = async () => {
+  const validateFormInput = () => {
     if (!name) {
       const newErrors: { name?: string } = {};
       newErrors.name = "Name is required!";
@@ -131,8 +117,8 @@ const EditInput: React.FC<EditInputProps> = ({
               Name
             </label>
             <input
+              value={name}
               onChange={(e) => handleOnChangeName(e.target.value)}
-              value={nameValue}
               id="name"
               name="name"
               type="text"
@@ -151,7 +137,7 @@ const EditInput: React.FC<EditInputProps> = ({
               Email
             </label>
             <input
-              value={emailValue}
+              value={email}
               onChange={(e) => handleOnChangeEmail(e.target.value)}
               id="email"
               name="email"
@@ -171,7 +157,7 @@ const EditInput: React.FC<EditInputProps> = ({
               Number Phone
             </label>
             <input
-              value={phoneValue}
+              value={phone}
               onChange={(e) => handleOnChangePhone(e.target.value)}
               id="phone"
               name="phone"

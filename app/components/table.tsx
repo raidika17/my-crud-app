@@ -17,7 +17,6 @@ interface DataProps {
 }
 
 const Table: React.FC<DataProps> = ({ data }) => {
-  // const [data, setData] = useState<Data[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [showPagination, setShowPagination] = useState(false);
@@ -85,8 +84,8 @@ const Table: React.FC<DataProps> = ({ data }) => {
     setShowConfirmation(false);
   };
 
-  const handleEdit = (no: string) => {
-    const queryString = new URLSearchParams(no).toString();
+  const handleEdit = (data: any) => {
+    const queryString = new URLSearchParams(data).toString();
     router.push(`/edit_user/destination?${queryString}`);
   };
 
@@ -119,7 +118,7 @@ const Table: React.FC<DataProps> = ({ data }) => {
                 <td className="py-2 px-4 border-b">{value.phone}</td>
                 <td className="py-2 px-4 border-b">
                   <button
-                    onClick={() => handleEdit(value.id)}
+                    onClick={() => handleEdit(value)}
                     className="bg-blue-500 text-white px-2 py-1 rounded mr-2"
                   >
                     Edit

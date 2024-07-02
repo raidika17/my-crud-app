@@ -1,7 +1,6 @@
 "use client";
 
 import EditInput from "@/app/components/editInput";
-import FormInput from "@/app/components/addInput";
 import TitleComponent from "@/app/components/title";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -27,13 +26,7 @@ const EditUsers = () => {
   return (
     <>
       <TitleComponent title="Edit User" />
-      <EditInput
-        methodSubmit="PUT"
-        id={id}
-        emailValue={email}
-        nameValue={name}
-        phoneValue={phone}
-      />
+      <EditInput getId={id} getEmail={email} getName={name} getPhone={phone} />
     </>
   );
 };
