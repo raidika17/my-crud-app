@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import SearchInput from "./search";
 import { useRouter } from "next/navigation";
 import ConfirmationCard from "./confirmationCard";
+import { deleteUser } from "@/lib/actions";
 
 interface Data {
   id: string;
@@ -20,10 +21,17 @@ const Table: React.FC<DataProps> = ({ data }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [showPagination, setShowPagination] = useState(false);
+
   const [id, setId] = useState("");
   const [name, setName] = useState("");
   const rowsPerPage = 10;
   const router = useRouter();
+
+  useEffect(() => {
+    if (data.length >= rowsPerPage) {
+      setShowPagination(true);
+    }
+  }, [data.length]);
 
   // Calculate total pages
   const totalPages = Math.ceil(data.length / rowsPerPage);
@@ -55,24 +63,9 @@ const Table: React.FC<DataProps> = ({ data }) => {
     ));
   };
 
-  // useEffect(() => {
-  //   fetchUsers();
-  // }, []);
-
-  // const fetchUsers = async () => {
-  // const res = await fetch(`${process.env.MYSQL_DB}/user`);
-  // const data = await res.json();
-  // console.log(data);
-  //   if (data.length >= rowsPerPage + 1) {
-  //     setShowPagination(true);
-  //   }
-  // };
-
-  const handleConfirmDelete = async () => {
-    // setShowConfirmation(false);
-    // await fetch(`http://localhost:3001/api/users/${id}`, {
-    //   method: "DELETE",
-    // });
+  const handleConfirmDelete = () => {
+    deleteUser(id);
+    setShowConfirmation(false);
     window.location.reload();
   };
 

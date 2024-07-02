@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import React from "react";
 import SuccessCard from "./successCard";
-import { createData } from "@/lib/actions";
+import { createUser } from "@/lib/actions";
 
 const AddInput: React.FC = () => {
   const [name, setName] = useState<string>("");
@@ -75,7 +75,7 @@ const AddInput: React.FC = () => {
 
   const handleSubmit = () => {
     setIsOpen(true);
-    createData(name, email, phone);
+    createUser(name, email, phone);
   };
 
   const validateFormInput = async () => {

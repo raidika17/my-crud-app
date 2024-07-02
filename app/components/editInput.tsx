@@ -2,7 +2,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import React from "react";
 import SuccessCard from "./successCard";
-import { UpdateData } from "@/lib/actions";
+import { UpdateUser } from "@/lib/actions";
 
 interface EditInputProps {
   getId: string;
@@ -85,7 +85,7 @@ const EditInput: React.FC<EditInputProps> = ({
 
   const handleSubmit = () => {
     setIsOpen(true);
-    UpdateData(getId, name, email, phone);
+    UpdateUser(getId, name, email, phone);
   };
 
   const validateFormInput = () => {
