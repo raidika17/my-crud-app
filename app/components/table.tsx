@@ -6,18 +6,22 @@ import { useRouter } from "next/navigation";
 import ConfirmationCard from "./confirmationCard";
 
 interface Data {
-  id: number;
+  id: string;
   name: string;
   email: string;
   phone: string;
 }
 
-const Table = () => {
-  const [data, setData] = useState<Data[]>([]);
+interface DataProps {
+  data: Data[];
+}
+
+const Table: React.FC<DataProps> = ({ data }) => {
+  // const [data, setData] = useState<Data[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [showPagination, setShowPagination] = useState(false);
-  const [id, setId] = useState(0);
+  const [id, setId] = useState("");
   const [name, setName] = useState("");
   const rowsPerPage = 10;
   const router = useRouter();
@@ -53,13 +57,13 @@ const Table = () => {
   };
 
   // useEffect(() => {
-  // fetchUsers();
+  //   fetchUsers();
   // }, []);
 
   // const fetchUsers = async () => {
-  //   const res = await fetch("http://localhost:3001/api/users");
-  //   const data = await res.json();
-  //   setData(data);
+  // const res = await fetch(`${process.env.MYSQL_DB}/user`);
+  // const data = await res.json();
+  // console.log(data);
   //   if (data.length >= rowsPerPage + 1) {
   //     setShowPagination(true);
   //   }
@@ -81,12 +85,12 @@ const Table = () => {
     setShowConfirmation(false);
   };
 
-  const handleEdit = (no: any) => {
+  const handleEdit = (no: string) => {
     const queryString = new URLSearchParams(no).toString();
     router.push(`/edit_user/destination?${queryString}`);
   };
 
-  const handleDelete = (id: number, name: string) => {
+  const handleDelete = (id: string, name: string) => {
     setShowConfirmation(true);
     setName(name);
     setId(id);
@@ -115,7 +119,7 @@ const Table = () => {
                 <td className="py-2 px-4 border-b">{value.phone}</td>
                 <td className="py-2 px-4 border-b">
                   <button
-                    onClick={() => handleEdit(value)}
+                    onClick={() => handleEdit(value.id)}
                     className="bg-blue-500 text-white px-2 py-1 rounded mr-2"
                   >
                     Edit

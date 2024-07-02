@@ -1,6 +1,14 @@
-"use client";
+"use server";
 import Dashboard from "./dashboard/page";
+import { getUsers } from "@/lib/data";
 
-export default function Home() {
-  return <Dashboard />;
-}
+const Home = async () => {
+  const users = await getUsers();
+  return (
+    <>
+      <Dashboard data={users} />
+    </>
+  );
+};
+
+export default Home;
