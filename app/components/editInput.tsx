@@ -46,7 +46,7 @@ const EditInput: React.FC<EditInputProps> = ({
   };
 
   const handleOnSuccess = () => {
-    route.push(`/dashboard`);
+    route.push(`/`);
   };
 
   const handleOnChangeName = (name: string) => {

@@ -36,7 +36,7 @@ const AddInput: React.FC = () => {
   };
 
   const handleOnSuccess = () => {
-    route.push(`/dashboard`);
+    route.push(`/`);
   };
 
   const handleOnChangeName = (name: string) => {

@@ -12,7 +12,7 @@ const Navbar: React.FC<NavbarProps> = ({ children }) => {
       <div className="container mx-auto bg-green-500 p-4 pr-10 rounded-br-full lg:justify-between md:justify-start flex items-center">
         <div className="text-white font-bold text-lg">My CRUD App</div>
         <div className="hidden md:flex space-x-6 text-white">
-          <Link href="/dashboard">
+          <Link href="/">
             <div className=" underline-animation">Dashboard</div>
           </Link>
           <Link href="/add_user">
