@@ -1,12 +1,9 @@
-"use server";
 import Dashboard from "./dashboard/page";
-import { getUsers } from "@/lib/data";
 
-const Home = async () => {
-  const users = await getUsers();
+const Home = () => {
   return (
     <>
-      <Dashboard data={users} />
+      <Dashboard />
     </>
   );
 };

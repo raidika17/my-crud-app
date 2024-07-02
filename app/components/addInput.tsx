@@ -4,22 +4,9 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import React from "react";
 import SuccessCard from "./successCard";
+import { addData } from "@/lib/actions";
 
-interface FormInputProps {
-  methodSubmit: string;
-  id?: string;
-  nameValue?: string;
-  emailValue?: string;
-  phoneValue?: string;
-}
-
-const FormInput: React.FC<FormInputProps> = ({
-  methodSubmit,
-  id,
-  nameValue,
-  emailValue,
-  phoneValue,
-}) => {
+const AddInput: React.FC = () => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
@@ -49,7 +36,7 @@ const FormInput: React.FC<FormInputProps> = ({
   };
 
   const handleOnSuccess = () => {
-    window.location.reload();
+    route.push(`/dashboard`);
   };
 
   const handleOnChangeName = (name: string) => {
@@ -86,19 +73,9 @@ const FormInput: React.FC<FormInputProps> = ({
     setErrorsEmail(newErrors);
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     setIsOpen(true);
-    await fetch(`http://localhost:3001/api/users/${id}`, {
-      method: `${methodSubmit}`,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: name,
-        email: email,
-        phone: phone,
-      }),
-    });
+    addData(name, email, phone);
   };
 
   const validateFormInput = async () => {
@@ -131,7 +108,6 @@ const FormInput: React.FC<FormInputProps> = ({
             </label>
             <input
               onChange={(e) => handleOnChangeName(e.target.value)}
-              value={nameValue}
               id="name"
               name="name"
               type="text"
@@ -150,7 +126,6 @@ const FormInput: React.FC<FormInputProps> = ({
               Email
             </label>
             <input
-              value={emailValue}
               onChange={(e) => handleOnChangeEmail(e.target.value)}
               id="email"
               name="email"
@@ -170,7 +145,6 @@ const FormInput: React.FC<FormInputProps> = ({
               Number Phone
             </label>
             <input
-              value={phoneValue}
               onChange={(e) => handleOnChangePhone(e.target.value)}
               id="phone"
               name="phone"
@@ -209,4 +183,4 @@ const FormInput: React.FC<FormInputProps> = ({
   );
 };
 
-export default FormInput;
+export default AddInput;

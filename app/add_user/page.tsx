@@ -1,17 +1,13 @@
-import FormInput from "../components/formInput";
+"use client";
+
 import TitleComponent from "../components/title";
+import AddInput from "../components/addInput";
 
 const AddUsers = () => {
   return (
     <>
       <TitleComponent title="Add User" />
-      <FormInput
-        methodSubmit="POST"
-        emailValue=""
-        id=""
-        nameValue=""
-        phoneValue=""
-      />
+      <AddInput />
     </>
   );
 };

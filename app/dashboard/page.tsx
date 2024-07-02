@@ -1,22 +1,14 @@
 import Table from "../components/table";
 import TitleComponent from "../components/title";
+import { getUsers } from "@/lib/data";
 
-interface Data {
-  id: string;
-  name: string;
-  email: string;
-  phone: string;
-}
+const Dashboard = async () => {
+  const users = await getUsers();
 
-interface DataProps {
-  data: Data[];
-}
-
-const Dashboard: React.FC<DataProps> = ({ data }) => {
   return (
     <div>
       <TitleComponent title="Dashboard" />
-      <Table data={data} />
+      <Table data={users} />
     </div>
   );
 };
