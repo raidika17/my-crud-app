@@ -46,7 +46,7 @@ const EditInput: React.FC<EditInputProps> = ({
   };
 
   const handleOnSuccess = () => {
-    route.push(`/`);
+    window.location.href = "/";
   };
 
   const handleOnChangeName = (name: string) => {

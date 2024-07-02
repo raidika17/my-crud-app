@@ -65,7 +65,6 @@ const Table: React.FC<DataProps> = ({ data }) => {
 
   const handleConfirmDelete = () => {
     deleteUser(id);
-    setShowConfirmation(false);
     window.location.reload();
   };
 
@@ -133,7 +132,7 @@ const Table: React.FC<DataProps> = ({ data }) => {
       </div>
       {showConfirmation && (
         <ConfirmationCard
-          message={`Are you sure you want to delete ${name} ?`}
+          message={`Are you sure you want to delete "${name}" ?`}
           onCancel={handleCancel}
           onDelete={handleConfirmDelete}
         />

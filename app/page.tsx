@@ -10,7 +10,6 @@ const Home = async ({
   };
 }) => {
   const query = searchParams?.query || "";
-
   const users = await getUsers(query);
 
   return (

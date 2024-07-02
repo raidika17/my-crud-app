@@ -36,7 +36,7 @@ const AddInput: React.FC = () => {
   };
 
   const handleOnSuccess = () => {
-    route.push(`/`);
+    window.location.href = "/";
   };
 
   const handleOnChangeName = (name: string) => {

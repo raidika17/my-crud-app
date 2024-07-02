@@ -3,30 +3,19 @@
 import EditInput from "@/app/components/editInput";
 import TitleComponent from "@/app/components/title";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
 
 const EditUsers = () => {
   const searchParams = useSearchParams();
-  const [id, setId] = useState<string>("");
-  const [name, setName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [phone, setPhone] = useState<string>("");
-  useEffect(() => {
-    const id = searchParams.get("id") as string;
-    const email = searchParams.get("email") as string;
-    const name = searchParams.get("name") as string;
-    const phone = searchParams.get("phone") as string;
-
-    setId(id);
-    setName(name);
-    setEmail(email);
-    setPhone(phone);
-  }, [searchParams]);
 
   return (
     <>
       <TitleComponent title="Edit User" />
-      <EditInput getId={id} getEmail={email} getName={name} getPhone={phone} />
+      <EditInput
+        getId={searchParams.get("id") as string}
+        getEmail={searchParams.get("email") as string}
+        getName={searchParams.get("name") as string}
+        getPhone={searchParams.get("phone") as string}
+      />
     </>
   );
 };
